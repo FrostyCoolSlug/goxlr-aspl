@@ -28,7 +28,11 @@ ExternalProject_Add(libASPL
 )
 
 # Configure the Library, and Link against libASPL
-add_library(${DRIVER_NAME} MODULE src/driver.cpp)
+add_library(${DRIVER_NAME} MODULE 
+    src/entry_point.cpp 
+    src/driver.cpp
+)
+
 target_include_directories(${DRIVER_NAME}
     PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/lib/libASPL/libASPL-prefix/include
 )
