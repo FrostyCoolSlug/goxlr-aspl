@@ -6,11 +6,11 @@ namespace GoXLR {
         // Create the Driver..
         auto context = std::make_shared<aspl::Context>();
 
-        this.plugin = std::make_shared<aspl::Plugin>(context);
-        this.driver = std::make_shared<aspl::Driver>(context, this.plugin);
+        plugin = std::make_shared<aspl::Plugin>(context);
+        driver = std::make_shared<aspl::Driver>(context, plugin);
 
         // Will invoke OnInitialize
-        this.driver.SetDriverHandler(this);
+        driver->SetDriverHandler(this);
     }
 
     Driver::~Driver() {
@@ -18,7 +18,7 @@ namespace GoXLR {
     }
 
     AudioServerPlugInDriverRef Driver::reference() {
-        return this.driver.getReference();
+        return driver->GetReference();
     }
 
     OSStatus Driver::OnInitialize() {

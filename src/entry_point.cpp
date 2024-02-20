@@ -14,5 +14,5 @@ extern "C" void* GoXLREntryPoint(CFAllocatorRef allocator, CFUUIDRef typeUUID)
 
     // Return a reference to the Driver..
     static Driver driver;
-    return driver->GetReference();
+    return driver.reference();
 }

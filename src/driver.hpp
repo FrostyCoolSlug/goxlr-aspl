@@ -21,5 +21,5 @@ namespace GoXLR {
             // Objects Registered in coreaudiod
             std::shared_ptr<aspl::Driver> driver;
             std::shared_ptr<aspl::Plugin> plugin;
-    }
+    };
 }
