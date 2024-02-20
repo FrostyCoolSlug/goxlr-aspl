@@ -23,6 +23,8 @@ namespace GoXLR {
 
     OSStatus Driver::OnInitialize() {
         // We need to start the GoXLR Manager here..
+        goxlr_manager = std::make_shared<GoXLRManager>(plugin);
+        goxlr_manager->locate_goxlr();
         
         // The Manager creates the device, we don't do anything
         return kAudioHardwareNoError;

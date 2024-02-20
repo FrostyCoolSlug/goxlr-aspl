@@ -3,6 +3,8 @@
 #include <aspl/Driver.hpp>
 #include <aspl/Plugin.hpp>
 
+#include "goxlr_manager.hpp"
+
 namespace GoXLR {
     class Driver : private aspl::DriverRequestHandler {
         public:
@@ -21,5 +23,7 @@ namespace GoXLR {
             // Objects Registered in coreaudiod
             std::shared_ptr<aspl::Driver> driver;
             std::shared_ptr<aspl::Plugin> plugin;
+
+            std::shared_ptr<GoXLRManager> goxlr_manager;
     };
 }
