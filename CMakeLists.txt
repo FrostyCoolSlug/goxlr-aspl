@@ -17,26 +17,7 @@ set(DRIVER_ENTRYPOINT "GoXLREntryPoint")
 
 
 
-# Configure libASPL as an external dependency..
-include(ExternalProject)
-ExternalProject_Add(libASPL
-  URL "https://github.com/gavv/libASPL/archive/refs/heads/main.zip"
-  SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/lib/libASPL/libASPL-src
-  BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR}/lib/libASPL/libASPL-build
-  INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}/lib/libASPL/libASPL-prefix
-  CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
-)
+# Configure and install external libraries..
+include(lib/CMakeLists.txt)
 
-# Configure the Library, and Link against libASPL
-add_library(${DRIVER_NAME} MODULE 
-    src/entry_point.cpp 
-    src/driver.cpp
-)
-
-target_include_directories(${DRIVER_NAME}
-    PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/lib/libASPL/libASPL-prefix/include
-)
-target_link_libraries(${DRIVER_NAME}
-    PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/lib/libASPL/libASPL-prefix/lib/libASPL.a
-)
-
+add_subdirectory(src)

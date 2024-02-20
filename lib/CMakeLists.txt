@@ -1,0 +1,20 @@
+# This file is included from the main CMakeLists in the parent directory.
+
+include(ExternalProject)
+
+# Add libASPL
+ExternalProject_Add(libASPL
+  SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/lib/libASPL
+  PREFIX ${CMAKE_CURRENT_BINARY_DIR}/lib/libASPL-prefix
+  CMAKE_ARGS
+    -DCMAKE_CXX_COMPILER_LAUNCHER=${CMAKE_CXX_COMPILER_LAUNCHER}
+    -DCMAKE_OSX_DEPLOYMENT_TARGET=${CMAKE_OSX_DEPLOYMENT_TARGET}
+    -DCMAKE_OSX_ARCHITECTURES=${OSX_ARCHITECTURES_LISTSEP}
+    -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
+)
+include_directories(SYSTEM
+  ${CMAKE_CURRENT_BINARY_DIR}/lib/libASPL-prefix/include
+)
+list(PREPEND CMAKE_PREFIX_PATH
+  ${CMAKE_CURRENT_BINARY_DIR}/lib/libASPL-prefix/lib/cmake
+)
