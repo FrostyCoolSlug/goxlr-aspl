@@ -1,15 +1,19 @@
 # The CMake File specifically for the driver..
 find_package(libASPL CONFIG REQUIRED)
+find_library(LIB_CoreFoundation CoreFoundation REQUIRED)
+find_library(LIB_CoreAudio CoreAudio REQUIRED)
 
 # Configure the Library, and Link against libASPL
 add_library(${DRIVER_NAME} MODULE 
     entry_point.cpp 
     driver.cpp
-    goxlr_manager.cpp
+    device.cpp
 )
 
 target_link_libraries(${DRIVER_NAME} PRIVATE
     aspl::libASPL
+    ${LIB_CoreFoundation}
+    ${LIB_CoreAudio}
 )
 
 set_target_properties(${DRIVER_NAME} PROPERTIES

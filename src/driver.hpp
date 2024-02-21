@@ -1,9 +1,8 @@
 // The 'Main' driver object, everything will live in here as the root..
-
-#include <aspl/Driver.hpp>
 #include <aspl/Plugin.hpp>
+#include <aspl/Driver.hpp>
 
-#include "goxlr_manager.hpp"
+#include "device.hpp"
 
 namespace GoXLR {
     class Driver : private aspl::DriverRequestHandler {
@@ -14,16 +13,18 @@ namespace GoXLR {
             Driver(const Driver&) = delete;
             Driver& operator=(const Driver&) = delete;
 
-            AudioServerPlugInDriverRef reference();
+            // Reference Fetcher
+            AudioServerPlugInDriverRef GetReference();
 
         private:
-            // Invoked during async driver initialisation, we generally setup here.
+            // Invoked during async driver initialiseation, we setup here.
             OSStatus OnInitialize() override;
 
             // Objects Registered in coreaudiod
             std::shared_ptr<aspl::Driver> driver;
             std::shared_ptr<aspl::Plugin> plugin;
 
-            std::shared_ptr<GoXLRManager> goxlr_manager;
+            // A thing we create..
+            std::shared_ptr<Device> device;
     };
 }

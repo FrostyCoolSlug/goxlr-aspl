@@ -1,6 +1,8 @@
 // This is the Driver's EntryPoint, simply creates the base driver and registers it.
 
+// #include "driver.hpp"
 #include "driver.hpp"
+#include <aspl/Driver.hpp>
 #include <CoreAudio/AudioServerPlugIn.h>
 
 using namespace GoXLR;
@@ -12,7 +14,6 @@ extern "C" void* GoXLREntryPoint(CFAllocatorRef allocator, CFUUIDRef typeUUID)
         return nullptr;
     }
 
-    // Return a reference to the Driver..
     static Driver driver;
-    return driver.reference();
+    return driver.GetReference();
 }
