@@ -6,14 +6,19 @@ find_library(LIB_CoreAudio CoreAudio REQUIRED)
 # Configure the Library, and Link against libASPL
 add_library(${DRIVER_NAME} MODULE 
     entry_point.cpp 
-    driver.cpp
-    device.cpp
+
+    # Resource files need to be added as 'source' files..
+    ../Resources/icon.icns
 )
 
 target_link_libraries(${DRIVER_NAME} PRIVATE
     aspl::libASPL
     ${LIB_CoreFoundation}
     ${LIB_CoreAudio}
+)
+
+set(RESOURCE_FILES
+    ../Resources/icon.icns
 )
 
 set_target_properties(${DRIVER_NAME} PROPERTIES
@@ -23,6 +28,7 @@ set_target_properties(${DRIVER_NAME} PROPERTIES
   PREFIX ""
   SUFFIX ""
   MACOSX_BUNDLE ON
+  RESOURCE "${RESOURCE_FILES}"
   MACOSX_BUNDLE_INFO_PLIST "${CMAKE_CURRENT_SOURCE_DIR}/Info.plist.in"
   MACOSX_BUNDLE_BUNDLE_NAME "${DRIVER_NAME}"
   MACOSX_BUNDLE_BUNDLE_VERSION "${DRIVER_VERSION}"
