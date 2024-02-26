@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 3.13)
 
+set(CMAKE_OSX_ARCHITECTURES "arm64;x86_64" CACHE INTERNAL "" FORCE)
+
+
 # Define the Project Name
 project(GoXLR_ASPL CXX)
 
@@ -18,6 +21,9 @@ set(DRIVER_ENTRYPOINT "GoXLREntryPoint")
 
 
 # Configure and install external libraries..
-include(lib/CMakeLists.txt)
+include(lib/dependencies.cmake)
 
-add_subdirectory(src)
+# We need to bootstrap libASPL before we can build the driver..
+if (NOT BOOTSTRAP)
+    add_subdirectory(src)
+endif()

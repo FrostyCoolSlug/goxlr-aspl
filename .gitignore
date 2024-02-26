@@ -2,3 +2,5 @@
 /goxlr-audio-helper/target/
 .idea/
 /lib/libASPL/
+/goxlr-audio-helper/goxlr-audio-helper.iml
+/.vscode/

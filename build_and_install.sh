@@ -1,11 +1,16 @@
 #!/bin/bash
 
-#rm -r build/
-cmake . -B build/
-cd  build
-make
-sudo cp -r src/*.driver /Library/Audio/Plug-Ins/HAL/
-sudo launchctl kickstart -k system/com.apple.audio.coreaudiod 
-cd ..
+# Update Submodules..
+git submodule update --init --recursive
 
+# Create the Build Directory..
+mkdir -p build
+
+# Perform the libASPL BootStrap process..
+cd build; cmake -DBOOTSTRAP=ON -B . ..; make; cd ..
+
+# Now Build the Driver..
+cd build; cmake -DBOOTSTRAP=OFF -B . ..; make; cd ..
+
+mv -r build/src/*.driver .
 
