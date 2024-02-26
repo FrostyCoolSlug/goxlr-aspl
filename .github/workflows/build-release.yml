@@ -1,0 +1,29 @@
+name: Create Release Build
+on: [workflow_dispatch, workflow_call]
+jobs:
+  build_macos:
+    name: "Build MacOS Driver"
+    runs-on: macos-12
+
+    steps:
+      - name: "Checkout Repository"
+        uses: actions/checkout@v4
+
+      - name: "Install Rust"
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: "Add x86_64 target support"
+        run: rustup target add x86_64-apple-darwin
+
+      - name: "Add arm64 support"
+        run: rustup target add aarch64-apple-darwin
+
+      - name: "Build the Driver.."
+        run: ./build.sh
+        shell: bash
+
+      - name: "Upload Artifact"
+        uses: actions/upload-artifact@v2
+        with:
+          name: macos-artifact
+          path: ./GoXLRDevice.tgz
