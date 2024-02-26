@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Just in case..
+rm -rf GoXLRDevice.driver
+
 # Update Submodules..
 git submodule update --init --recursive
 
@@ -22,4 +25,8 @@ cd build; cmake -DBOOTSTRAP=ON -B . ..; make; cd ..
 cd build; cmake -DBOOTSTRAP=OFF -B . ..; make; cd ..
 
 mv build/src/*.driver .
+tar zcvf GoXLRDevice.tgz GoXLRDevice.driver
+
+# Remove the Driver
+rm -rf GoXLRDevice.driver
 
