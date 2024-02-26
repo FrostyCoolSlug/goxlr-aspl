@@ -9,6 +9,7 @@ add_library(${DRIVER_NAME} MODULE
 
     # Resource files need to be added as 'source' files..
     ../Resources/icon.icns
+    ../Resources/goxlr-audio-helper
 )
 
 target_link_libraries(${DRIVER_NAME} PRIVATE
@@ -19,6 +20,7 @@ target_link_libraries(${DRIVER_NAME} PRIVATE
 
 set(RESOURCE_FILES
     ../Resources/icon.icns
+    ../Resources/goxlr-audio-helper
 )
 
 set_target_properties(${DRIVER_NAME} PROPERTIES
